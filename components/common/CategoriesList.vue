@@ -5,7 +5,7 @@
             <div v-for="category in categories" :key="category.slug" :class="$style.block">
                 <nuxt-link :to="`/category/${category.slug}`">
                     <p>{{ category.name }}</p>
-                    <img :src="category.image" />
+                    <img v-lazy="category.image" :class="$style.image" />
                 </nuxt-link>
             </div>
         </div>
@@ -30,5 +30,11 @@ export default {
 .block {
     display: flex;
     flex-direction: column;
+}
+.image {
+    width: 100%;
+    min-height: 300px;
+    max-width: 400px;
+    max-height: 400px;
 }
 </style>
