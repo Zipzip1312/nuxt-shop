@@ -1,31 +1,32 @@
 <template>
-    <div class="container">
-        <div>
-            <Logo />
-            <h1 class="title">nuxt-shop</h1>
-            <div class="links">
-                <a
-                    href="https://nuxtjs.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="button--green"
-                >Documentation</a>
-                <a
-                    href="https://github.com/nuxt/nuxt.js"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="button--grey"
-                >GitHub</a>
-            </div>
-        </div>
+    <div>
+        <h1 class="title">Nuxt Shop</h1>
+        <CategoriesList :categories="categories" />
     </div>
 </template>
 
 <script>
-import Logo from "@/components/Logo";
+import CategoriesList from "~~/components/common/CategoriesList";
+import { mapState } from "vuex";
 export default {
     components: {
-        Logo
+        CategoriesList
+    },
+    async asyncData({ app, route, params, error, store }) {
+        try {
+            await store.dispatch("getCategoriesList");
+        } catch (err) {
+            console.log(err);
+            return error({
+                statusCode: 404,
+                message: "Categories not found or server not available"
+            });
+        }
+    },
+    computed: {
+        ...mapState({
+            categories: "categoriesList"
+        })
     }
 };
 </script>
