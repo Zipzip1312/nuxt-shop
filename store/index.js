@@ -2,6 +2,7 @@
 const sleep = m => new Promise(r => setTimeout(r, m))
 const categories = [
     {
+        id: 1,
         title: 'Cats',
         name: 'Cats',
         slug: 'cats',
@@ -10,6 +11,7 @@ const categories = [
         image: 'https://source.unsplash.com/300x300/?cat,cats'
     },
     {
+        id: 2,
         title: 'Dogs',
         name: 'Dogs',
         slug: 'dogs',
@@ -18,6 +20,7 @@ const categories = [
         image: 'https://source.unsplash.com/300x300/?dog,dogs'
     },
     {
+        id: 3,
         title: 'Wolfs',
         name: 'Wolfs',
         slug: 'wolfs',
@@ -26,6 +29,7 @@ const categories = [
         image: 'https://source.unsplash.com/300x300/?wolf'
     },
     {
+        id: 4,
         title: 'Bulls',
         name: 'Bulls',
         slug: 'bulls',
@@ -34,6 +38,22 @@ const categories = [
         image: 'https://source.unsplash.com/300x300/?ox'
     }
 ]
+
+function addProductsToCategory(products, category) {
+    const categoryInner = { ...category, products: [] }
+    products.map(p => {
+        if (p.category_id === category.id) {
+            categoryInner.products.push({
+                id: p.id,
+                name: p.name,
+                slug: p.slug,
+                price: p.price,
+                image: `https://source.unsplash.com/300x300/?${p.name}`
+            })
+        }
+    })
+    return categoryInner
+}
 
 export const state = () => ({
     categoriesList: [],
@@ -45,6 +65,9 @@ export const mutations = {
     },
     SET_CURRENT_CATEGORY(state, category) {
         state.currentCategory = category
+    },
+    SET_CURRENT_PRODUCT(state, product) {
+        state.currentProduct = product
     }
 }
 export const actions = {
@@ -60,6 +83,7 @@ export const actions = {
     async getCurrentCategory({ commit }, { route }) {
         await sleep(1000)
         const category = categories.find((category) => category.slug === route.params.category)
-        await commit('SET_CURRENT_CATEGORY', category)
+        const products = await this.$axios.get('/mock/products.json')
+        await commit('SET_CURRENT_CATEGORY', addProductsToCategory(products.data, category))
     }
 }

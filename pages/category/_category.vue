@@ -2,12 +2,19 @@
     <div>
         <h1>{{ category.name }}</h1>
         <p>{{ category.description }}</p>
+        <div :class="$style.productList">
+            <div v-for="product in category.products" :key="product.id">
+                <ProductBrief :product="product" />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import ProductBrief from "~~/components/category/ProductBrief";
 import { mapState } from "vuex";
 export default {
+    components: { ProductBrief },
     async asyncData({ app, params, route, error }) {
         try {
             await app.store.dispatch("getCurrentCategory", { route });
@@ -38,3 +45,11 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" module>
+.productList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+</style>
