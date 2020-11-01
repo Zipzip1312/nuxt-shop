@@ -2,10 +2,10 @@
     <div>
         <h2>Categories</h2>
         <div :class="$style.wrapper">
-            <div v-for="category in categories" :key="category.cSlug" :class="$style.block">
-                <nuxt-link :to="`/category/${category.cSlug}`">
-                    <p>{{ category.cName }}</p>
-                    <img :src="category.cImage" />
+            <div v-for="category in categories" :key="category.slug" :class="$style.block">
+                <nuxt-link :to="`/category/${category.slug}`">
+                    <p>{{ category.name }}</p>
+                    <img :src="category.image" />
                 </nuxt-link>
             </div>
         </div>

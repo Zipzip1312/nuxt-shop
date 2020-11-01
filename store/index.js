@@ -2,33 +2,49 @@
 const sleep = m => new Promise(r => setTimeout(r, m))
 const categories = [
     {
-        cName: 'Cats',
-        cSlug: 'cats',
-        cImage: 'https://source.unsplash.com/300x300/?cat,cats'
+        title: 'Cats',
+        name: 'Cats',
+        slug: 'cats',
+        metaDescription: 'Meta description',
+        description: 'Description',
+        image: 'https://source.unsplash.com/300x300/?cat,cats'
     },
     {
-        cName: 'Dogs',
-        cSlug: 'dogs',
-        cImage: 'https://source.unsplash.com/300x300/?dog,dogs'
+        title: 'Dogs',
+        name: 'Dogs',
+        slug: 'dogs',
+        metaDescription: 'Meta description',
+        description: 'Description',
+        image: 'https://source.unsplash.com/300x300/?dog,dogs'
     },
     {
-        cName: 'Wolfs',
-        cSlug: 'wolfs',
-        cImage: 'https://source.unsplash.com/300x300/?wolf'
+        title: 'Wolfs',
+        name: 'Wolfs',
+        slug: 'wolfs',
+        metaDescription: 'Meta description',
+        description: 'Description',
+        image: 'https://source.unsplash.com/300x300/?wolf'
     },
     {
-        cName: 'Bulls',
-        cSlug: 'bulls',
-        cImage: 'https://source.unsplash.com/300x300/?ox'
+        title: 'Bulls',
+        name: 'Bulls',
+        slug: 'bulls',
+        metaDescription: 'Meta description',
+        description: 'Description',
+        image: 'https://source.unsplash.com/300x300/?ox'
     }
 ]
 
 export const state = () => ({
-    categoriesList: []
+    categoriesList: [],
+    currentCategory: {}
 })
 export const mutations = {
     SET_CATEGORIES_LIST(state, categories) {
         state.categoriesList = categories
+    },
+    SET_CURRENT_CATEGORY(state, category) {
+        state.currentCategory = category
     }
 }
 export const actions = {
@@ -38,7 +54,12 @@ export const actions = {
             await commit('SET_CATEGORIES_LIST', categories)
         } catch (err) {
             console.log(err)
-            throw new Error('Internal server error, inform administrator')
+            throw new Error('Internal server error, inform admin')
         }
+    },
+    async getCurrentCategory({ commit }, { route }) {
+        await sleep(1000)
+        const category = categories.find((category) => category.slug === route.params.category)
+        await commit('SET_CURRENT_CATEGORY', category)
     }
 }
