@@ -8,7 +8,8 @@ const categories = [
         slug: 'cats',
         metaDescription: 'Meta description',
         description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?cat,cats'
+        image: 'https://source.unsplash.com/300x300/?cat,cats',
+        products: []
     },
     {
         id: 2,
@@ -17,7 +18,8 @@ const categories = [
         slug: 'dogs',
         metaDescription: 'Meta description',
         description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?dog,dogs'
+        image: 'https://source.unsplash.com/300x300/?dog,dogs',
+        products: []
     },
     {
         id: 3,
@@ -26,7 +28,8 @@ const categories = [
         slug: 'wolfs',
         metaDescription: 'Meta description',
         description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?wolf'
+        image: 'https://source.unsplash.com/300x300/?wolf',
+        products: []
     },
     {
         id: 4,
@@ -35,11 +38,12 @@ const categories = [
         slug: 'bulls',
         metaDescription: 'Meta description',
         description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?ox'
+        image: 'https://source.unsplash.com/300x300/?ox',
+        products: []
     }
 ]
 
-function addProductsToCategory(products, category) {
+function addProductsToCategory(products, productsImages, category) {
     const categoryInner = { ...category, products: [] }
     products.map(p => {
         if (p.category_id === category.id) {
@@ -48,7 +52,8 @@ function addProductsToCategory(products, category) {
                 name: p.name,
                 slug: p.slug,
                 price: p.price,
-                image: `https://source.unsplash.com/300x300/?${p.name}`
+                // image: `https://source.unsplash.com/300x300/?${p.name}`
+                image: productsImages.find(img => img.id === p.id).urls
             })
         }
     })
@@ -82,8 +87,15 @@ export const actions = {
     },
     async getCurrentCategory({ commit }, { route }) {
         await sleep(1000)
-        const category = categories.find((category) => category.slug === route.params.category)
-        const products = await this.$axios.get('/mock/products.json')
-        await commit('SET_CURRENT_CATEGORY', addProductsToCategory(products.data, category))
-    }
+        const category = categories.find((category) => category.slug === route.params.slug)
+
+        const [products, productsImages] = await Promise.all(
+            [
+                this.$axios.$get('/mock/products.json'),
+                this.$axios.$get('/mock/products-images.json')
+            ]
+        )
+
+        await commit('SET_CURRENT_CATEGORY', addProductsToCategory(products, productsImages, category))
+    },
 }

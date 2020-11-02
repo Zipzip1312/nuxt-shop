@@ -2,11 +2,17 @@
     <div>
         <h1>{{ category.name }}</h1>
         <p>{{ category.description }}</p>
-        <div :class="$style.productList">
-            <div v-for="product in category.products" :key="product.id">
-                <ProductBrief :product="product" />
-            </div>
-        </div>
+        <v-row>
+            <v-col v-for="product in category.products" :key="product.id" cols="6" sm="4" md="3">
+                <v-hover>
+                    <ProductBrief
+                        :product="product"
+                        slot-scope="{ hover }"
+                        :class="`elevation-${hover ? 6 : 2}`"
+                    />
+                </v-hover>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -47,9 +53,4 @@ export default {
 </script>
 
 <style lang="scss" module>
-.productList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 </style>

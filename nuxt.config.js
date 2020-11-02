@@ -26,13 +26,12 @@ module.exports = {
     router: {
         prefetchLinks: false
     },
-    loading: { color: '#ddd' },
+    loading: { color: '#1867c0', height: '4px' },
     css: [
         'normalize.css',
         './assets/scss/global-styles.scss'
     ],
     plugins: [
-        { src: '~~/plugins/vue-lazy-load.js' },
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
@@ -40,7 +39,8 @@ module.exports = {
         'nuxt-trailingslash-module',
         'nuxt-webfontloader',
         'cookie-universal-nuxt',
-        '@nuxtjs/style-resources'
+        '@nuxtjs/style-resources',
+        '@nuxtjs/vuetify',
     ],
 
     webfontloader: {

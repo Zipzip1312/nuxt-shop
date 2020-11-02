@@ -1,9 +1,23 @@
 <template>
-    <nuxt />
+    <v-app>
+        <Menu />
+        <v-main class="grey lighten-2 pb-10">
+            <v-container>
+                <nuxt />
+            </v-container>
+        </v-main>
+        <Footer />
+    </v-app>
 </template>
 
 <script>
+import Menu from "~/components/layout/Menu";
+import Footer from "~/components/layout/Footer";
 export default {
+    components: {
+        Menu,
+        Footer
+    },
     computed: {
         meta() {
             return [
@@ -19,7 +33,7 @@ export default {
     },
 
     head() {
-        const domain = "https://mysite.com";
+        const domain = "https://nuxt-shop.com";
         const canonical = `${domain}${this.$route.path
             .toLowerCase()
             .replace(/\/$/, "")}`;
