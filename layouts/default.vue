@@ -2,9 +2,11 @@
     <v-app>
         <Menu />
         <v-main class="grey lighten-2 pb-10">
+            <Breadcrumbs />
             <v-container>
                 <nuxt />
             </v-container>
+            <CartModal />
         </v-main>
         <Footer />
     </v-app>
@@ -12,10 +14,14 @@
 
 <script>
 import Menu from "~/components/layout/Menu";
+import Breadcrumbs from "~/components/layout/Breadcrumbs";
+import CartModal from "~~/components/modals/CartModal";
 import Footer from "~/components/layout/Footer";
 export default {
     components: {
         Menu,
+        Breadcrumbs,
+        CartModal,
         Footer
     },
     computed: {

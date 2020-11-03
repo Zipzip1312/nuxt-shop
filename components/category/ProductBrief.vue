@@ -3,7 +3,7 @@
         <nuxt-link :to="`/product/${product.slug}`">
             <v-img
                 :lazy-src="require('~/assets/svg/download.svg')"
-                :src="product.image.imgL"
+                :src="product.images.imgL"
                 :class="$style.image"
             ></v-img>
         </nuxt-link>
@@ -18,25 +18,21 @@
 
             <v-card-text class="black--text text-right text-h6">${{ product.price }}</v-card-text>
 
-            <v-btn block large tile color="warning" class="white--text" @click="addToCart">
-                Add to cart
-                <v-icon class="ml-2">mdi-cart</v-icon>
-            </v-btn>
+            <BuyButton :product="product" block />
         </div>
     </v-card>
 </template>
 
 <script>
+import BuyButton from "~~/components/common/BuyButton";
 export default {
+    components: {
+        BuyButton
+    },
     props: {
         product: {
             type: Object,
             default: () => {}
-        }
-    },
-    methods: {
-        addToCart() {
-            console.log("Adding to cart: ", this.product.name);
         }
     }
 };

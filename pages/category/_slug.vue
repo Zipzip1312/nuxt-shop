@@ -1,26 +1,16 @@
 <template>
     <div>
-        <h1>{{ category.name }}</h1>
+        <h1 class="mt-0">{{ category.name }}</h1>
         <p>{{ category.description }}</p>
-        <v-row>
-            <v-col v-for="product in category.products" :key="product.id" cols="6" sm="4" md="3">
-                <v-hover>
-                    <ProductBrief
-                        :product="product"
-                        slot-scope="{ hover }"
-                        :class="`elevation-${hover ? 6 : 2}`"
-                    />
-                </v-hover>
-            </v-col>
-        </v-row>
+        <ProductsList :products="category.products" />
     </div>
 </template>
 
 <script>
-import ProductBrief from "~~/components/category/ProductBrief";
+import ProductsList from "~~/components/category/ProductsList";
 import { mapState } from "vuex";
 export default {
-    components: { ProductBrief },
+    components: { ProductsList },
     async asyncData({ app, params, route, error }) {
         try {
             await app.store.dispatch("getCurrentCategory", { route });

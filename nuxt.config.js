@@ -24,6 +24,7 @@ module.exports = {
     serverMiddleware: [
     ],
     router: {
+        middleware: ['resetBreadcrumbs'],
         prefetchLinks: false
     },
     loading: { color: '#1867c0', height: '4px' },
@@ -32,6 +33,8 @@ module.exports = {
         './assets/scss/global-styles.scss'
     ],
     plugins: [
+        { src: '~~/plugins/vue-modal.js', mode: 'client' },
+        { src: '~~/plugins/filters.js' },
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
@@ -41,6 +44,12 @@ module.exports = {
         'cookie-universal-nuxt',
         '@nuxtjs/style-resources',
         '@nuxtjs/vuetify',
+        ['nuxt-vuex-localstorage', {
+            ...(isDev && {
+                mode: 'debug'
+            }),
+            localStorage: ['cart'] //  If not entered, "localStorage" is the default value
+        }]
     ],
 
     webfontloader: {

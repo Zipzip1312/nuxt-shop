@@ -1,68 +1,16 @@
 // function for Mock API
-const sleep = m => new Promise(r => setTimeout(r, m))
-const categories = [
-    {
-        id: 1,
-        title: 'Cats',
-        name: 'Cats',
-        slug: 'cats',
-        metaDescription: 'Meta description',
-        description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?cat,cats',
-        products: []
-    },
-    {
-        id: 2,
-        title: 'Dogs',
-        name: 'Dogs',
-        slug: 'dogs',
-        metaDescription: 'Meta description',
-        description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?dog,dogs',
-        products: []
-    },
-    {
-        id: 3,
-        title: 'Wolfs',
-        name: 'Wolfs',
-        slug: 'wolfs',
-        metaDescription: 'Meta description',
-        description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?wolf',
-        products: []
-    },
-    {
-        id: 4,
-        title: 'Bulls',
-        name: 'Bulls',
-        slug: 'bulls',
-        metaDescription: 'Meta description',
-        description: 'Description',
-        image: 'https://source.unsplash.com/300x300/?ox',
-        products: []
-    }
-]
+import mock from '../utils/mockServer'
 
-function addProductsToCategory(products, productsImages, category) {
-    const categoryInner = { ...category, products: [] }
-    products.map(p => {
-        if (p.category_id === category.id) {
-            categoryInner.products.push({
-                id: p.id,
-                name: p.name,
-                slug: p.slug,
-                price: p.price,
-                // image: `https://source.unsplash.com/300x300/?${p.name}`
-                image: productsImages.find(img => img.id === p.id).urls
-            })
-        }
-    })
-    return categoryInner
-}
+const sleep = m => new Promise(r => setTimeout(r, m))
 
 export const state = () => ({
     categoriesList: [],
-    currentCategory: {}
+    currentCategory: {},
+    currentProduct: {
+        alsoBuyProducts: [],
+        interestingProducts: []
+    },
+    breadcrumbs: []
 })
 export const mutations = {
     SET_CATEGORIES_LIST(state, categories) {
@@ -73,21 +21,28 @@ export const mutations = {
     },
     SET_CURRENT_PRODUCT(state, product) {
         state.currentProduct = product
+    },
+    SET_BREADCRUMBS(state, crumbs) {
+        state.breadcrumbs = crumbs
+    },
+    RESET_BREADCRUMBS(state) {
+        state.breadcrumbs = []
     }
 }
 export const actions = {
     async getCategoriesList({ commit }) {
         try {
             await sleep(1000)
-            await commit('SET_CATEGORIES_LIST', categories)
+            await commit('SET_CATEGORIES_LIST', mock.categories)
         } catch (err) {
             console.log(err)
             throw new Error('Internal server error, inform admin')
         }
     },
-    async getCurrentCategory({ commit }, { route }) {
+
+    async getCurrentCategory({ commit, dispatch }, { route }) {
         await sleep(1000)
-        const category = categories.find((category) => category.slug === route.params.slug)
+        const category = mock.categories.find((category) => category.slug === route.params.slug)
 
         const [products, productsImages] = await Promise.all(
             [
@@ -96,6 +51,49 @@ export const actions = {
             ]
         )
 
-        await commit('SET_CURRENT_CATEGORY', addProductsToCategory(products, productsImages, category))
+        const crumbs = mock.getBreadcrumbs('category', route, category)
+        await dispatch('setBreadcrumbs', crumbs)
+
+        await commit('SET_CURRENT_CATEGORY', mock.addProductsToCategory(products, productsImages, category))
+    },
+
+    async getCurrentProduct({ commit, dispatch }, { route }) {
+        // simulate api work
+        await sleep(50)
+        const productSlug = route.params.slug
+        const [products, productsImages, alsoBuyProducts, interestingProducts] = await Promise.all(
+            [
+                this.$axios.$get('/mock/products.json'),
+                this.$axios.$get('/mock/products-images.json'),
+                dispatch('getProductsListRandom'),
+                dispatch('getProductsListRandom')
+            ]
+        )
+
+        const product = mock.getProduct(products, productsImages, productSlug)
+        await commit('SET_CURRENT_PRODUCT', { ...product, alsoBuyProducts, interestingProducts })
+
+        const crumbs = mock.getBreadcrumbs('product', route, product)
+        await dispatch('setBreadcrumbs', crumbs)
+    },
+
+    async setBreadcrumbs({ commit }, data) {
+        await commit('SET_BREADCRUMBS', data)
+    },
+
+    async getProductsListRandom({ commit }) {
+        // simulate api work
+        await sleep(50)
+        const [products, productsImages] = await Promise.all(
+            [
+                this.$axios.$get('/mock/products.json'),
+                this.$axios.$get('/mock/products-images.json')
+            ]
+
+        )
+
+        const idsArray = (mock.sampleSize(products, 4)).map(p => p.id)
+
+        return mock.getProductsByIds(products, productsImages, idsArray)
     },
 }

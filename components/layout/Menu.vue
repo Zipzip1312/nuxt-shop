@@ -7,13 +7,22 @@
                 </nuxt-link>
                 <v-spacer></v-spacer>
                 <v-toolbar-items class="hidden-xs-only">
-                    <v-btn v-for="link in navLinks" :key="link.title" :to="link.route">
+                    <v-btn
+                        v-for="link in navLinks"
+                        :key="link.title"
+                        :to="link.route"
+                        nuxt
+                        depressed
+                    >
                         <v-icon left dark>{{ link.icon }}</v-icon>
                         {{ link.title }}
                     </v-btn>
                 </v-toolbar-items>
-            </v-toolbar>
 
+                <v-toolbar-items>
+                    <CartButton />
+                </v-toolbar-items>
+            </v-toolbar>
             <v-app-bar-nav-icon @click="drawer = !drawer" class="d-sm-none mr-3"></v-app-bar-nav-icon>
         </v-app-bar>
 
@@ -31,17 +40,16 @@
 </template>
 
 <script>
+import CartButton from "~~/components/layout/CartButton";
 export default {
+    components: {
+        CartButton
+    },
     data() {
         return {
             app: "Nuxt Shop",
             drawer: null,
             navLinks: [
-                {
-                    title: "Home",
-                    route: "/",
-                    icon: "mdi-shopping"
-                },
                 {
                     title: "Cats",
                     route: "/category/cats",
