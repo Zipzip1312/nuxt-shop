@@ -10,7 +10,8 @@ export const state = () => ({
         alsoBuyProducts: [],
         interestingProducts: []
     },
-    breadcrumbs: []
+    breadcrumbs: [],
+    orderDetails: null
 })
 export const mutations = {
     SET_CATEGORIES_LIST(state, categories) {
@@ -27,7 +28,13 @@ export const mutations = {
     },
     RESET_BREADCRUMBS(state) {
         state.breadcrumbs = []
-    }
+    },
+    SET_ORDER_DETAILS(state, order) {
+        state.orderDetails = order
+    },
+    RESET_ORDER_DETAILS(state) {
+        state.orderDetails = null
+    },
 }
 export const actions = {
     async getCategoriesList({ commit }) {
@@ -96,4 +103,12 @@ export const actions = {
 
         return mock.getProductsByIds(products, productsImages, idsArray)
     },
+
+    async setOrderDetails({ commit }, orderDetails) {
+        await commit('SET_ORDER_DETAILS', orderDetails)
+    },
+
+    async resetOrderDetails({ commit }) {
+        await commit('RESET_ORDER_DETAILS')
+    }
 }

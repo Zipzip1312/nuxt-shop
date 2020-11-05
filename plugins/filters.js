@@ -15,4 +15,8 @@ export default async (context, inject) => {
 
         return value;
     })
+
+    Vue.filter('round', (num) => {
+        return Math.round((num + Number.EPSILON) * 100) / 100;
+    })
 }

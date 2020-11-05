@@ -30,9 +30,12 @@ export const mutations = {
     },
     SET_PRODUCTS_BY_IDS(state, products) {
         state.metaProducts = products
+    },
+    REMOVE_PRODUCTS(state) {
+        state.products = [];
     }
-
 }
+
 export const getters = {
     getProductsInCart: state => {
         const products = []
@@ -45,6 +48,7 @@ export const getters = {
         return products.sort((a, b) => a.order - b.order)
     }
 }
+
 export const actions = {
     async setProductsListByIds({ commit, state }) {
         // simulate api work
@@ -70,6 +74,11 @@ export const actions = {
         await sleep(50)
         await commit('REMOVE_PRODUCT', productId)
         await dispatch('setProductsListByIds')
+    },
+    async removeProducts({ commit }) {
+        // simulate api work
+        await sleep(50)
+        await commit('REMOVE_PRODUCTS')
     },
     async setProductQuantity({ commit, dispatch }, { productId, qty }) {
         // simulate api work

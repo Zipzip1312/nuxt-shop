@@ -21,7 +21,6 @@
 <script>
 import { mapGetters } from "vuex";
 import CartProductsList from "~~/components/cart/CartProductsList.vue";
-import round from "~~/mixins/round.js";
 export default {
     props: {
         addedProduct: {
@@ -32,8 +31,6 @@ export default {
     components: {
         CartProductsList
     },
-    mixins: [round],
-
     computed: {
         ...mapGetters({
             getProductsInCart: "cart/getProductsInCart"

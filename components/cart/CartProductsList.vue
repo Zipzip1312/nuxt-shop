@@ -58,11 +58,9 @@
 </template>
 
 <script>
-import round from "~~/mixins/round";
 import { mapActions } from "vuex";
 import debounce from "lodash.debounce";
 export default {
-    mixins: [round],
     props: {
         productsFromCart: {
             type: Array,

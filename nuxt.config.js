@@ -35,6 +35,7 @@ module.exports = {
     plugins: [
         { src: '~~/plugins/vue-modal.js', mode: 'client' },
         { src: '~~/plugins/filters.js' },
+        { src: '~~/plugins/vuelidate.js' },
     ],
     modules: [
         // Doc: https://axios.nuxtjs.org/usage

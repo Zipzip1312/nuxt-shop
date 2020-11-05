@@ -49,6 +49,7 @@
                                     nuxt
                                     to="/checkout"
                                     class="mt-3 px-6"
+                                    @click="$modal.hide('customer-cart')"
                                 >To checkout</v-btn>
                             </div>
                         </template>
