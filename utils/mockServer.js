@@ -7,7 +7,7 @@ const categories = [
         slug: 'cats',
         metaDescription: 'Meta description',
         description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores, voluptatem! Dolorum accusantium asperiores aperiam laudantium!',
-        image: 'https://source.unsplash.com/300x300/?cat,cats',
+        image: '/images/category-cats.jpeg',
         products: []
     },
     {
@@ -17,7 +17,7 @@ const categories = [
         slug: 'dogs',
         metaDescription: 'Meta description',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate nostrum illo error exercitationem vitae porro quaerat vero excepturi voluptas quasi?',
-        image: 'https://source.unsplash.com/300x300/?dog,dogs',
+        image: '/images/category-dogs.jpeg',
         products: []
     },
     {
@@ -27,7 +27,7 @@ const categories = [
         slug: 'wolfs',
         metaDescription: 'Meta description',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error eum libero dolor laborum quidem consequuntur optio tempora dolorem quos, ullam voluptatibus magnam nihil ex totam laboriosam doloremque nulla! Quasi, aliquam.',
-        image: 'https://source.unsplash.com/300x300/?wolf',
+        image: '/images/category-wolfs.jpeg',
         products: []
     },
     {
@@ -37,7 +37,7 @@ const categories = [
         slug: 'bulls',
         metaDescription: 'Meta description',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga qui exercitationem facilis? Facilis quaerat nobis amet sint nam expedita natus dolores, impedit quos veritatis repellendus explicabo, velit est omnis itaque!',
-        image: 'https://source.unsplash.com/300x300/?ox',
+        image: '/images/category-bulls.jpeg',
         products: []
     }
 ]

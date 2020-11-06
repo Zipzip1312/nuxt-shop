@@ -21,19 +21,19 @@ export default {
         return {
             slides: [
                 {
-                    image: "https://source.unsplash.com/1200x400/?cat,cats",
+                    image: "/images/slide-cats.jpeg",
                     link: "/category/cats"
                 },
                 {
-                    image: "https://source.unsplash.com/1200x400/?dog,dogs",
+                    image: "/images/slide-dogs.jpeg",
                     link: "/category/dogs"
                 },
                 {
-                    image: "https://source.unsplash.com/1200x400/?wolf,wolfs",
+                    image: "/images/slide-wolfs.jpeg",
                     link: "/category/wolfs"
                 },
                 {
-                    image: "https://source.unsplash.com/1200x400/?bull,bulls",
+                    image: "/images/slide-bulls.jpeg",
                     link: "/category/bulls"
                 }
             ]

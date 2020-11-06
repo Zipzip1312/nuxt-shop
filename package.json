@@ -9,7 +9,8 @@
         "dev": "cross-env NODE_ENV=development NUXT_PORT=3000 nuxt",
         "start": "cross-env NODE_ENV=production nuxt start",
         "test": "jest",
-        "generate:images": "node utils/grabImages.js"
+        "generate:images": "node utils/grabImages.js",
+        "download:images": "node utils/imagesDownloader.js"
     },
     "dependencies": {
         "@nuxtjs/axios": "5.9.5",

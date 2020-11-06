@@ -23,6 +23,7 @@ async function fetchApiImg(searchQuery) {
             throw 'no image'
         }
     } catch (error) {
+        console.log(error, searchQuery);
         return {
             imgXL: "https://cdn.pixabay.com/photo/2013/05/14/18/25/frog-111179_1280.jpg",
             imgL: "https://cdn.pixabay.com/photo/2013/05/14/18/25/frog-111179_1280.jpg"
