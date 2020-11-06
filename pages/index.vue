@@ -1,15 +1,17 @@
 <template>
     <div>
-        <h1>Nuxt Shop</h1>
+        <Slider class="mb-5" />
         <CategoriesList :categories="categories" />
     </div>
 </template>
 
 <script>
+import Slider from "~~/components/common/Slider";
 import CategoriesList from "~~/components/common/CategoriesList";
 import { mapState } from "vuex";
 export default {
     components: {
+        Slider,
         CategoriesList
     },
     async asyncData({ app, route, params, error, store }) {

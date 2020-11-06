@@ -1,7 +1,7 @@
 <template>
     <div v-if="breadcrumbs && breadcrumbs.length > 0">
         <v-container>
-            <v-breadcrumbs :items="breadcrumbs" class="px-0 mb-n7">
+            <v-breadcrumbs :items="breadcrumbs" class="px-0 py-3 mb-n5">
                 <template v-slot:item="{ item }">
                     <v-breadcrumbs-item
                         nuxt

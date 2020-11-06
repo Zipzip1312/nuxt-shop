@@ -3,9 +3,12 @@
         <client-only>
             <div class="wrapper">
                 <template v-if="getAddedProduct">
-                    <p class="subtitle-1 mt-4 mb-2">You've added</p>
+                    <v-subheader class="pl-0">You've added</v-subheader>
                     <CartProductsList :products-from-cart="getAddedProduct" />
-                    <div class="my-4" v-if="getProducts.length > 0">Previously added products</div>
+                    <v-subheader
+                        class="pl-0"
+                        v-if="getProducts.length > 0"
+                    >Previously added products</v-subheader>
                 </template>
                 <CartProductsList :products-from-cart="getProducts" />
             </div>

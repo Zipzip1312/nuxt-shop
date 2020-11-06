@@ -27,7 +27,7 @@
 
                     <v-card-text>
                         <div v-if="getProductsInCart.length === 0">
-                            <p>There are no products yet, but this can be easily fixed :)</p>
+                            <v-subheader>There are no products yet, but this can be easily fixed :)</v-subheader>
                         </div>
 
                         <template v-else>

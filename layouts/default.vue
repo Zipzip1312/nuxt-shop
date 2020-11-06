@@ -4,7 +4,9 @@
         <v-main class="grey lighten-2 pb-10">
             <Breadcrumbs />
             <v-container>
-                <nuxt />
+                <transition name="fade" mode="out-in">
+                    <nuxt />
+                </transition>
             </v-container>
             <CartModal />
         </v-main>
