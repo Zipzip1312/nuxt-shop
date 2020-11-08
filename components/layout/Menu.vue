@@ -2,6 +2,8 @@
     <div class="menu">
         <v-app-bar app>
             <v-toolbar flat color="transparent" class="container py-0">
+                <v-app-bar-nav-icon @click="drawer = !drawer" class="d-sm-none mr-3"></v-app-bar-nav-icon>
+
                 <nuxt-link to="/" class="text-decoration-none">
                     <v-toolbar-title class="black--text">Nuxt Shop</v-toolbar-title>
                 </nuxt-link>
@@ -23,7 +25,6 @@
                     <CartButton />
                 </v-toolbar-items>
             </v-toolbar>
-            <v-app-bar-nav-icon @click="drawer = !drawer" class="d-sm-none mr-3"></v-app-bar-nav-icon>
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer" fixed temporary>
@@ -77,6 +78,8 @@ export default {
 
 <style lang="scss">
 .menu .v-toolbar__content {
+    max-width: 1185px;
     padding: 0;
+    margin: 0 auto;
 }
 </style>

@@ -1,11 +1,6 @@
 <template>
     <client-only>
-        <v-btn
-            depressed
-            @click.prevent="onClickHandler"
-            class="btn-cart mr-n2 mr-sm-n0"
-            aria-label="Cart"
-        >
+        <v-btn depressed @click.prevent="onClickHandler" aria-label="Cart">
             <v-icon>mdi-cart</v-icon>
             <v-badge v-if="productsQuantity > 0" :content="productsQuantity" color="error"></v-badge>
         </v-btn>
