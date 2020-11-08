@@ -21,8 +21,7 @@ module.exports = {
         ]
     },
     rootDir: __dirname,
-    serverMiddleware: [
-    ],
+    serverMiddleware: ['~/serverMiddleware/setHeaders'],
     router: {
         middleware: ['resetBreadcrumbs'],
         prefetchLinks: false
@@ -78,7 +77,7 @@ module.exports = {
         //     pushAssets: (req, res, publicPath, preloadFiles) => preloadFiles
         //     .map(f => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`)
         //   },
-        // compressor: false,
+        compressor: true,
         resourceHints: false,
         etag: false,
         static: {

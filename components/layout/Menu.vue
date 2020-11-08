@@ -3,7 +3,7 @@
         <v-app-bar app>
             <v-toolbar flat color="transparent" class="container py-0">
                 <nuxt-link to="/" class="text-decoration-none">
-                    <v-toolbar-title class="black--text">{{ app }}</v-toolbar-title>
+                    <v-toolbar-title class="black--text">Nuxt Shop</v-toolbar-title>
                 </nuxt-link>
                 <v-spacer></v-spacer>
                 <v-toolbar-items class="hidden-xs-only">
@@ -47,7 +47,6 @@ export default {
     },
     data() {
         return {
-            app: "Nuxt Shop",
             drawer: null,
             navLinks: [
                 {

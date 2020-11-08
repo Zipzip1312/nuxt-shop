@@ -9,6 +9,7 @@
                 v-if="!isProductAdded"
                 @click.prevent="buyClickHandler"
                 class="white--text"
+                aria-label="Add to cart"
             >
                 Add to cart
                 <v-icon class="ml-2">mdi-cart</v-icon>
@@ -21,6 +22,7 @@
                 color="success"
                 @click.prevent="addedClickHandler"
                 class="white--text"
+                aria-label="added to cart"
             >
                 <v-icon class="mr-2">mdi-check</v-icon>added to cart
             </v-btn>

@@ -1,6 +1,6 @@
 <template>
     <v-card height="100%" class="hide-overflow d-flex flex-column justify-space-between">
-        <nuxt-link :to="`/product/${product.slug}`">
+        <nuxt-link :to="`/product/${product.slug}`" aria-label="Product">
             <v-img
                 :lazy-src="require('~/assets/svg/download.svg')"
                 :src="product.images.imgL"
