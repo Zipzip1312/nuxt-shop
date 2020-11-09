@@ -21,7 +21,7 @@ module.exports = {
         ]
     },
     rootDir: __dirname,
-    serverMiddleware: ['~/serverMiddleware/setHeaders'],
+    // serverMiddleware: ['~/serverMiddleware/setHeaders'],
     router: {
         middleware: ['resetBreadcrumbs'],
         prefetchLinks: false
