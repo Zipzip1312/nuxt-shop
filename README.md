@@ -1,4 +1,4 @@
-# NUXT PWA online store powered by Vuetify
+# NUXT PWA online shop powered by Vuetify
 
 ### Structure
 
