@@ -51,6 +51,7 @@ async function main() {
     try {
         const imagesUrls = await getImagesUrls()
         await writeFileAsync('./static/mock/products-images.json', JSON.stringify(imagesUrls), { flag: 'w+' })
+        console.log('\x1b[36m%s\x1b[0m', 'Products images were generated successfully!');
     } catch (error) {
         console.log(error)
     }
