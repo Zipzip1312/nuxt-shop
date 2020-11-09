@@ -24,7 +24,11 @@ module.exports = {
     // serverMiddleware: ['~/serverMiddleware/setHeaders'],
     router: {
         middleware: ['resetBreadcrumbs'],
-        prefetchLinks: false
+        prefetchLinks: false,
+        scrollBehavior(to, from, savedPosition) {
+            return { x: 0, y: 0 }
+        }
+
     },
     loading: { color: '#1867c0', height: '4px' },
     css: [
