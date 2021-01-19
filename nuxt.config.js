@@ -74,6 +74,7 @@ module.exports = {
     */
     axios: {
         // See https://github.com/nuxt-community/axios-module#options
+        browserBaseURL: (isDev) ? process.env.BASE_URL : 'https://nuxt-pwa-shop.herokuapp.com'
     },
     render: {
         // http2: {
