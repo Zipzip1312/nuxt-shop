@@ -53,7 +53,7 @@
                                                     product
                                                 )
                                             "
-                                            class="text-center"
+                                            class="text-center input-qty"
                                         />
                                     </div>
                                     <div>
@@ -121,6 +121,9 @@ export default {
 .product-image {
     width: 100%;
     object-fit: contain;
+}
+.input-qty {
+    width: 55px;
 }
 @media (max-width: 599px) {
     .products-list {

@@ -27,7 +27,10 @@
 
                     <v-card-text>
                         <div v-if="getProductsInCart.length === 0">
-                            <v-subheader>There are no products yet, but this can be easily fixed :)</v-subheader>
+                            <v-subheader
+                                >There are no products yet, but this can be
+                                easily fixed :)</v-subheader
+                            >
                         </div>
 
                         <template v-else>
@@ -39,9 +42,12 @@
                                 <v-btn
                                     outlined
                                     color="primary"
-                                    @click.prevent="$modal.hide('customer-cart')"
+                                    @click.prevent="
+                                        $modal.hide('customer-cart')
+                                    "
                                     class="mt-3"
-                                >Continue shopping</v-btn>
+                                    >Continue shopping</v-btn
+                                >
 
                                 <v-btn
                                     depressed
@@ -50,7 +56,8 @@
                                     to="/checkout"
                                     class="mt-3 px-6"
                                     @click="$modal.hide('customer-cart')"
-                                >To checkout</v-btn>
+                                    >To checkout</v-btn
+                                >
                             </div>
                         </template>
                     </v-card-text>
@@ -65,34 +72,34 @@ import { mapGetters } from "vuex";
 import Cart from "~~/components/cart/Cart";
 export default {
     components: {
-        Cart
+        Cart,
     },
     data() {
         return {
             addedProduct: null,
             defaults: {
-                addedProduct: null
-            }
+                addedProduct: null,
+            },
         };
     },
 
     computed: {
         ...mapGetters({
-            getProductsInCart: "cart/getProductsInCart"
-        })
+            getProductsInCart: "cart/getProductsInCart",
+        }),
     },
 
     watch: {
-        $route: function() {
+        $route: function () {
             this.$modal.hide("customer-cart");
         },
-        getProductsInCart: function(newVal, oldVal) {
+        getProductsInCart: function (newVal, oldVal) {
             if (oldVal.length > 0) {
                 if (this.getProductsInCart.length === 0) {
                     this.$modal.hide("customer-cart");
                 }
             }
-        }
+        },
     },
     methods: {
         async beforeOpen(event) {
@@ -104,15 +111,15 @@ export default {
             } else {
                 this.addedProduct = this.defaults.addedProduct;
             }
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="scss">
 .customer-cart {
     position: relative;
-    &-close {
+    &-close.v-btn {
         position: absolute;
         top: 0.9em;
         right: 0.9em;
