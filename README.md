@@ -1,5 +1,7 @@
 # NUXT PWA shop powered by Vuetify
 
+## [DEMO](https://nuxt-pwa-shop.herokuapp.com/)
+
 ### Structure
 
 - Main page with products catalog
