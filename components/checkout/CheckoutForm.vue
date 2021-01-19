@@ -17,9 +17,13 @@
                             v-model="form.phone"
                             :rules="phoneRules"
                             label="Phone"
+                            @focus="addMask"
                             required
+                            maxlength="12"
                         ></v-text-field>
-                        <span class="text--disabled" style="font-size: 12px;">Format: 380123456789</span>
+                        <span class="text--disabled" style="font-size: 12px"
+                            >Format: 380123456789</span
+                        >
                     </v-col>
 
                     <v-col cols="12">
@@ -39,7 +43,8 @@
                                 color="primary"
                                 large
                                 :disabled="!valid"
-                            >Order</v-btn>
+                                >Order</v-btn
+                            >
 
                             <div class="text-right text-h6 black--text">
                                 Total:
@@ -59,8 +64,8 @@ export default {
     props: {
         products: {
             type: Array,
-            required: true
-        }
+            required: true,
+        },
     },
     data() {
         return {
@@ -68,45 +73,49 @@ export default {
             form: {
                 name: "",
                 phone: "",
-                email: ""
+                email: "",
             },
-            nameRules: [v => !!v || "Name is required"],
+            nameRules: [(v) => !!v || "Name is required"],
             phoneRules: [
-                v => !!v || "Phone is required",
-                v => /380+\d{9}$/.test(v) || "Phone must match the format"
+                (v) => !!v || "Phone is required",
+                (v) => /380+\d{9}$/.test(v) || "Phone must match the format",
             ],
             emailRules: [
-                v => !!v || "E-mail is required",
-                v => /.+@.+/.test(v) || "E-mail must be valid"
-            ]
+                (v) => !!v || "E-mail is required",
+                (v) => /.+@.+/.test(v) || "E-mail must be valid",
+            ],
         };
     },
     computed: {
         getAmount() {
             let amount = 0;
 
-            this.products.forEach(product => {
+            this.products.forEach((product) => {
                 amount +=
                     parseFloat(product.meta.price) * parseInt(product.qty);
             });
 
             return amount;
-        }
+        },
     },
     methods: {
         ...mapActions(["setOrderDetails"]),
+        addMask() {
+            if (this.form.phone === "") {
+                this.form.phone = "380";
+            }
+        },
         onSubmit() {
             const orderDetails = {
                 ...this.form,
-                products: this.products
+                products: this.products,
             };
 
             this.setOrderDetails(orderDetails);
 
             // send order details to the server
-
             this.$router.push({ name: "checkout-success" });
-        }
-    }
+        },
+    },
 };
 </script>
