@@ -17,7 +17,11 @@
                         </div>
 
                         <div class="image-wrapper d-flex">
-                            <img class="product-image" :src="product.meta.images.imgL" />
+                            <img
+                                class="product-image"
+                                :src="product.meta.images.imgL"
+                                onerror="this.src = 'https://via.placeholder.com/300x300'"
+                            />
                         </div>
 
                         <div class="d-flex flex-grow-1 justify-space-between">
@@ -27,7 +31,10 @@
                                 <div class="mb-3 mb-sm-0 pl-1 pl-sm-5">
                                     <nuxt-link
                                         :to="`/product/${product.meta.slug}`"
-                                    >{{ product.meta.name | truncate('6') }}</nuxt-link>
+                                        >{{
+                                            product.meta.name | truncate("6")
+                                        }}</nuxt-link
+                                    >
                                 </div>
                                 <div
                                     class="product-meta-price d-flex justify-space-between pl-1 pl-sm-5 pr-2"
@@ -40,17 +47,30 @@
                                             type="number"
                                             :min="1"
                                             :max="1000"
-                                            @input.prevent="onQuantityChangeHandler($event, product)"
+                                            @input.prevent="
+                                                onQuantityChangeHandler(
+                                                    $event,
+                                                    product
+                                                )
+                                            "
                                             class="text-center"
                                         />
                                     </div>
-                                    <div>${{ (product.meta.price * product.qty) | round }}</div>
+                                    <div>
+                                        ${{
+                                            (product.meta.price * product.qty)
+                                                | round
+                                        }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <v-divider v-if="index < (productsFromCart.length - 1)" class="my-2"></v-divider>
+                    <v-divider
+                        v-if="index < productsFromCart.length - 1"
+                        class="my-2"
+                    ></v-divider>
                 </div>
             </v-card>
         </client-only>
@@ -64,13 +84,13 @@ export default {
     props: {
         productsFromCart: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     methods: {
         ...mapActions({
             setProductQuantity: "cart/setProductQuantity",
-            removeProduct: "cart/removeProduct"
+            removeProduct: "cart/removeProduct",
         }),
         onRemoveClickHandler(product) {
             this.removeProduct(product.productId);
@@ -82,8 +102,8 @@ export default {
             const qty = e.target.value;
             this.setProductQuantity({ productId: product.productId, qty });
         },
-        400)
-    }
+        400),
+    },
 };
 </script>
 

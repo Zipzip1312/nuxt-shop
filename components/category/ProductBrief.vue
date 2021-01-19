@@ -1,10 +1,14 @@
 <template>
-    <v-card height="100%" class="hide-overflow d-flex flex-column justify-space-between">
+    <v-card
+        height="100%"
+        class="hide-overflow d-flex flex-column justify-space-between"
+    >
         <nuxt-link :to="`/product/${product.slug}`" aria-label="Product">
             <v-img
                 :lazy-src="require('~/assets/svg/download.svg')"
-                :src="product.images.imgL"
+                :src="productImage"
                 :class="$style.image"
+                @error="imageSrcError()"
             ></v-img>
         </nuxt-link>
 
@@ -13,10 +17,13 @@
                 <nuxt-link
                     :to="`/product/${product.slug}`"
                     class="black--text text-decoration-none"
-                >{{ product.name }}</nuxt-link>
+                    >{{ product.name }}</nuxt-link
+                >
             </v-card-title>
 
-            <v-card-text class="black--text text-right text-h6">${{ product.price }}</v-card-text>
+            <v-card-text class="black--text text-right text-h6"
+                >${{ product.price }}</v-card-text
+            >
 
             <BuyButton :product="product" block />
         </div>
@@ -27,14 +34,24 @@
 import BuyButton from "~~/components/common/BuyButton";
 export default {
     components: {
-        BuyButton
+        BuyButton,
     },
     props: {
         product: {
             type: Object,
-            default: () => {}
-        }
-    }
+            default: () => {},
+        },
+    },
+    data() {
+        return {
+            productImage: this.product.images.imgL,
+        };
+    },
+    methods: {
+        imageSrcError() {
+            this.productImage = "https://via.placeholder.com/300x300";
+        },
+    },
 };
 </script>
 

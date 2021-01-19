@@ -4,7 +4,11 @@
             <div v-for="(product, index) in products" :key="index">
                 <v-card class="d-flex flex-row">
                     <div :class="$style.image" class="d-flex">
-                        <img class="product-image" :src="product.meta.images.imgL" />
+                        <img
+                            class="product-image"
+                            :src="product.meta.images.imgL"
+                            onerror="this.src = 'https://via.placeholder.com/300x300'"
+                        />
                     </div>
 
                     <div class="d-flex flex-grow-1 justify-space-between">
@@ -14,22 +18,35 @@
                             <div class="mb-5 pl-1 pl-sm-5">
                                 <nuxt-link
                                     :to="`/product/${product.meta.slug}`"
-                                >{{ product.meta.name | truncate('6') }}</nuxt-link>
+                                    >{{
+                                        product.meta.name | truncate("6")
+                                    }}</nuxt-link
+                                >
                             </div>
                             <div
                                 class="product-meta-price d-flex justify-space-between pl-1 pl-sm-5 pr-2 w-100"
                             >
-                                <div :class="$style.price">${{ product.meta.price }}</div>
+                                <div :class="$style.price">
+                                    ${{ product.meta.price }}
+                                </div>
                                 <div>
                                     <b>Qty: {{ product.qty }}</b>
                                 </div>
-                                <div>${{ (product.meta.price * product.qty) | round }}</div>
+                                <div>
+                                    ${{
+                                        (product.meta.price * product.qty)
+                                            | round
+                                    }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </v-card>
 
-                <v-divider v-if="index < (products.length - 1)" class="my-2"></v-divider>
+                <v-divider
+                    v-if="index < products.length - 1"
+                    class="my-2"
+                ></v-divider>
             </div>
         </v-container>
     </v-card>
@@ -40,9 +57,9 @@ export default {
     props: {
         products: {
             type: Array,
-            required: true
-        }
-    }
+            required: true,
+        },
+    },
 };
 </script>
 
