@@ -4,14 +4,17 @@
             <a :href="product.images.imgXL" target="_blank">
                 <v-img
                     :lazy-src="require('~/assets/svg/download.svg')"
-                    :src="product.images.imgL"
+                    :src="productImage"
                     :class="$style.image"
+                    @error="imageSrcError()"
                 ></v-img>
             </a>
         </v-col>
         <v-col cols="12" sm="6" class="d-flex flex-column">
             <h1 class="mt-0 mt-xs-3">{{ product.name }}</h1>
-            <div class="d-flex flex-column flex-sm-row align-start align-sm-center mb-4">
+            <div
+                class="d-flex flex-column flex-sm-row align-start align-sm-center mb-4"
+            >
                 <div class="mr-10 text-h6">${{ product.price }}</div>
                 <BuyButton :product="product" class="mt-5 mt-sm-auto" />
             </div>
@@ -35,7 +38,12 @@ import BuyButton from "~~/components/common/BuyButton";
 export default {
     components: {
         ProductsList,
-        BuyButton
+        BuyButton,
+    },
+    data() {
+        return {
+            productImage: "",
+        };
     },
     async asyncData({ app, params, route, error }) {
         try {
@@ -44,14 +52,22 @@ export default {
             console.log(err);
             return error({
                 statusCode: 404,
-                message: "Product not found or server not available"
+                message: "Product not found or server not available",
             });
         }
     },
     computed: {
         ...mapState({
-            product: "currentProduct"
-        })
+            product: "currentProduct",
+        }),
+    },
+    mounted() {
+        this.productImage = this.product.images.imgL;
+    },
+    methods: {
+        imageSrcError() {
+            this.productImage = "https://via.placeholder.com/600x600";
+        },
     },
     head() {
         return {
@@ -60,11 +76,11 @@ export default {
                 {
                     hid: "description",
                     name: "description",
-                    content: this.product.metaDescription
-                }
-            ]
+                    content: this.product.metaDescription,
+                },
+            ],
         };
-    }
+    },
 };
 </script>
 <style lang="scss" module>
