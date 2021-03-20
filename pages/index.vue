@@ -12,23 +12,24 @@ import { mapState } from "vuex";
 export default {
     components: {
         Slider,
-        CategoriesList
+        CategoriesList,
     },
     async asyncData({ app, route, params, error, store }) {
         try {
             await store.dispatch("getCategoriesList");
+            await store.dispatch("togglePending");
         } catch (err) {
             console.log(err);
             return error({
                 statusCode: 404,
-                message: "Categories not found or server not available"
+                message: "Categories not found or server not available",
             });
         }
     },
     computed: {
         ...mapState({
-            categories: "categoriesList"
-        })
-    }
+            categories: "categoriesList",
+        }),
+    },
 };
 </script>

@@ -12,7 +12,8 @@ export const state = () => ({
         interestingProducts: []
     },
     breadcrumbs: [],
-    orderDetails: null
+    orderDetails: null,
+    pending: true
 })
 export const mutations = {
     SET_CATEGORIES_LIST(state, categories) {
@@ -36,6 +37,9 @@ export const mutations = {
     RESET_ORDER_DETAILS(state) {
         state.orderDetails = null
     },
+    TOGGLE_PENDING(state) {
+        state.pending = !state.pending
+    }
 }
 export const actions = {
     async getCategoriesList({ commit }) {
@@ -111,5 +115,9 @@ export const actions = {
 
     async resetOrderDetails({ commit }) {
         await commit('RESET_ORDER_DETAILS')
+    },
+
+    async togglePending({ commit }) {
+        await commit('TOGGLE_PENDING')
     }
 }
