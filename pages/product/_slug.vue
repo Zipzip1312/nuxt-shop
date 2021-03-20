@@ -1,14 +1,12 @@
 <template>
     <v-row>
         <v-col cols="12" sm="6">
-            <a :href="product.images.imgXL" target="_blank">
-                <v-img
-                    :lazy-src="require('~/assets/svg/download.svg')"
-                    :src="productImage"
-                    :class="$style.image"
-                    @error="imageSrcError()"
-                ></v-img>
-            </a>
+            <v-img
+                :lazy-src="require('~/assets/svg/download.svg')"
+                :src="productImage"
+                :class="$style.image"
+                @error="imageSrcError()"
+            ></v-img>
         </v-col>
         <v-col cols="12" sm="6" class="d-flex flex-column">
             <h1 class="mt-0 mt-xs-3">{{ product.name }}</h1>
@@ -66,7 +64,7 @@ export default {
     },
     methods: {
         imageSrcError() {
-            this.productImage = "https://via.placeholder.com/600x600";
+            this.productImage = `/images/notfound/${this.product.category.name}.jpg`;
         },
     },
     head() {
@@ -87,6 +85,5 @@ export default {
 .image {
     max-width: 100%;
     height: auto;
-    cursor: zoom-in;
 }
 </style>

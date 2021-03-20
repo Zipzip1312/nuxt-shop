@@ -8,7 +8,7 @@
                 :lazy-src="require('~/assets/svg/download.svg')"
                 :src="productImage"
                 :class="$style.image"
-                @error="imageSrcError()"
+                @error="imageSrcError(product)"
             ></v-img>
         </nuxt-link>
 
@@ -32,6 +32,7 @@
 
 <script>
 import BuyButton from "~~/components/common/BuyButton";
+import mock from "../../utils/mockServer";
 export default {
     components: {
         BuyButton,
@@ -48,8 +49,20 @@ export default {
         };
     },
     methods: {
-        imageSrcError() {
-            this.productImage = "https://via.placeholder.com/300x300";
+        imageSrcError(product) {
+            const categorySlug = window.location.href.split("/").reverse()[0];
+            const categories = mock.categories.map(({ slug }) => slug);
+            let imageSrc = "https://via.placeholder.com/300x300";
+
+            if (categories.includes(categorySlug)) {
+                const category =
+                    categorySlug[0].toUpperCase() + categorySlug.slice(1);
+                imageSrc = `/images/notfound/${category}.jpg`;
+            } else if (product.category.name) {
+                imageSrc = `/images/notfound/${product.category.name}.jpg`;
+            }
+
+            this.productImage = imageSrc;
         },
     },
 };

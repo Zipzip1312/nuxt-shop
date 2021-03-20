@@ -18,9 +18,12 @@
 
                         <div class="image-wrapper d-flex">
                             <img
+                                width="300"
+                                height="300"
                                 class="product-image"
                                 :src="product.meta.images.imgL"
-                                onerror="this.src = 'https://via.placeholder.com/300x300'"
+                                :data-category="product.meta.category.name"
+                                onerror="this.src = `/images/notfound/${this.dataset.category}.jpg`"
                             />
                         </div>
 
@@ -120,6 +123,7 @@ export default {
 }
 .product-image {
     width: 100%;
+    height: auto;
     object-fit: contain;
 }
 .input-qty {

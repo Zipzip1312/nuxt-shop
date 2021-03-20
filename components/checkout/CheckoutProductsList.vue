@@ -7,7 +7,8 @@
                         <img
                             class="product-image"
                             :src="product.meta.images.imgL"
-                            onerror="this.src = 'https://via.placeholder.com/300x300'"
+                            :data-category="product.meta.category.name"
+                            onerror="this.src = `/images/notfound/${this.dataset.category}.jpg`"
                         />
                     </div>
 
