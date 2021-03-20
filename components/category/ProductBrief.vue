@@ -11,17 +11,20 @@
                 @error="imageSrcError(product)"
             ></v-img>
         </nuxt-link>
-
-        <div>
-            <v-card-title class="text-subtitle-1">
+        <div
+            class="d-flex flex-column justify-space-between"
+            style="height: 100%"
+        >
+            <v-card-title class="text-subtitle-1 mb-auto">
                 <nuxt-link
                     :to="`/product/${product.slug}`"
                     class="black--text text-decoration-none"
+                    :class="$style.link"
                     >{{ product.name }}</nuxt-link
                 >
             </v-card-title>
 
-            <v-card-text class="black--text text-right text-h6"
+            <v-card-text class="black--text text-right text-h6 align-self-end"
                 >${{ product.price }}</v-card-text
             >
 
@@ -72,5 +75,8 @@ export default {
 .image {
     max-width: 100%;
     height: auto;
+}
+.link {
+    word-break: normal;
 }
 </style>

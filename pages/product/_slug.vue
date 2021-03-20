@@ -9,11 +9,13 @@
             ></v-img>
         </v-col>
         <v-col cols="12" sm="6" class="d-flex flex-column">
-            <h1 class="mt-0 mt-xs-3">{{ product.name }}</h1>
+            <h1 class="mt-0 mt-xs-3 mb-0 mb-sm-4">{{ product.name }}</h1>
             <div
-                class="d-flex flex-column flex-sm-row align-start align-sm-center mb-4"
+                class="d-flex flex-row-reverse flex-sm-row align-baseline align-sm-start mb-8 mb-sm-4"
             >
-                <div class="mr-10 text-h6">${{ product.price }}</div>
+                <div class="mr-auto ml-auto mr-sm-10 ml-sm-0 text-h6">
+                    ${{ product.price }}
+                </div>
                 <BuyButton :product="product" class="mt-5 mt-sm-auto" />
             </div>
             <div class="mb-2">{{ product.description }}</div>

@@ -6,7 +6,7 @@
 
         <v-app v-else>
             <Menu />
-            <v-main class="grey lighten-2 pb-10">
+            <v-main class="pb-10">
                 <Breadcrumbs />
                 <v-container>
                     <transition name="fade" mode="out-in">
