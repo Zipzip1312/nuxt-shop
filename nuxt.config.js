@@ -48,6 +48,7 @@ module.exports = {
         'cookie-universal-nuxt',
         '@nuxtjs/style-resources',
         '@nuxtjs/vuetify',
+        '@nuxtjs/pwa',
         ['nuxt-vuex-localstorage', {
             ...(isDev && {
                 mode: 'debug'
@@ -87,6 +88,38 @@ module.exports = {
         etag: false,
         static: {
             etag: false
+        }
+    },
+    pwa: {
+        icon: {
+            iconSrc: './static/logo512.png'
+        },
+        manifest: {
+            lang: 'en',
+            short_name: 'NuxtSHOP',
+            name: 'NuxtSHOP',
+            start_url: '/',
+            display: 'standalone',
+            theme_color: '#ffffff'
+        },
+        workbox: {
+            /* workbox options */
+            dev: false,
+            offlineStrategy: 'StaleWhileRevalidate',
+            runtimeCaching: [
+                {
+                    urlPattern: 'https://nuxt-pwa-shop.herokuapp.com/images/.*',
+                    handler: 'cacheFirst',
+                    method: 'GET',
+                    strategyOptions: {
+                        cacheName: 'giphy',
+                        cacheExpiration: {
+                            maxEntries: 100,
+                            maxAgeSeconds: 60 * 60 * 24 * 10
+                        }
+                    }
+                }
+            ]
         }
     },
     /*
