@@ -1,10 +1,10 @@
 <template>
-    <v-app>
-        <client-only v-if="pending">
+    <div>
+        <div v-if="pending">
             <Pending />
-        </client-only>
+        </div>
 
-        <div v-else>
+        <v-app v-else>
             <Menu />
             <v-main class="grey lighten-2 pb-10">
                 <Breadcrumbs />
@@ -16,8 +16,8 @@
                 <CartModal />
             </v-main>
             <Footer />
-        </div>
-    </v-app>
+        </v-app>
+    </div>
 </template>
 
 <script>
@@ -64,6 +64,12 @@ export default {
             ],
             link: [{ rel: "canonical", href: canonical }],
         };
+    },
+
+    mounted() {
+        setTimeout(() => {
+            this.$store.dispatch("togglePending");
+        }, 1000);
     },
 };
 </script>

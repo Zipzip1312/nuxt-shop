@@ -17,7 +17,6 @@ export default {
     async asyncData({ app, route, params, error, store }) {
         try {
             await store.dispatch("getCategoriesList");
-            await store.dispatch("togglePending");
         } catch (err) {
             console.log(err);
             return error({

@@ -38,7 +38,7 @@ export const mutations = {
         state.orderDetails = null
     },
     TOGGLE_PENDING(state) {
-        state.pending = !state.pending
+        state.pending = false
     }
 }
 export const actions = {
