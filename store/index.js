@@ -1,7 +1,8 @@
 // function for Mock API
 import mock from '../utils/mockServer'
 
-const sleep = m => new Promise(r => setTimeout(r, m))
+// const sleep = m => new Promise(r => setTimeout(r, m))
+const sleep = m => new Promise(r => r())
 
 export const state = () => ({
     categoriesList: [],

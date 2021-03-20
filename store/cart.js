@@ -1,6 +1,7 @@
 // function for Mock API
 import mock from '../utils/mockServer'
-const sleep = m => new Promise(r => setTimeout(r, m))
+// const sleep = m => new Promise(r => setTimeout(r, m))
+const sleep = m => new Promise(r => r())
 const findMax = (array, field) => {
     if (!array || array.lenght === 0) return 1
     return Math.max(...array.map(o => o[field]), 0)
